@@ -1,21 +1,97 @@
+:root {
+  --ink: #17212b;
+  --muted: #66717c;
+  --paper: #f6f3ed;
+  --surface: #fffdf9;
+  --line: #e5ded3;
+  --navy: #17324d;
+  --coral: #e56b4f;
+  --coral-dark: #c9543c;
+  --mint: #dcefe7;
+  --shadow: 0 18px 45px rgba(38, 41, 43, 0.08);
+}
+
+* { box-sizing: border-box; }
+
 body {
-  background-color: #f8f9fa;
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  background-image: radial-gradient(circle at 10% 0%, rgba(229, 107, 79, 0.09), transparent 26rem);
 }
 
-.card {
-  border-radius: 12px;
-}
-
-.table thead th {
-  font-weight: 600;
+.navbar {
+  min-height: 76px;
+  background: rgba(255, 253, 249, 0.9) !important;
+  border-color: var(--line) !important;
+  backdrop-filter: blur(14px);
 }
 
 .navbar-brand {
-  font-weight: 600;
+  color: var(--navy);
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 
+.navbar-brand span { color: var(--coral); }
+.navbar-text { color: var(--muted) !important; font-size: 0.9rem; }
+
+main.container { max-width: 1180px; padding-top: 3.25rem !important; padding-bottom: 4rem !important; }
+h1, h2, h3, h4, h5 { color: var(--navy); font-weight: 700; letter-spacing: -0.035em; }
+h1 { font-size: clamp(2.6rem, 6vw, 5rem); line-height: 0.98; }
+
+.card, .search-panel {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.card-body { padding: 1.6rem; }
+.btn { border-radius: 10px; font-weight: 700; padding: 0.7rem 1.05rem; }
+.btn-primary { background: var(--coral); border-color: var(--coral); }
+.btn-primary:hover, .btn-primary:focus { background: var(--coral-dark); border-color: var(--coral-dark); }
+.btn-outline-primary { color: var(--coral-dark); border-color: #e6a090; }
+.btn-outline-primary:hover { background: var(--coral); border-color: var(--coral); }
+.btn-outline-secondary { color: var(--navy); border-color: #bdc6ca; }
+.btn-outline-secondary:hover { color: white; background: var(--navy); border-color: var(--navy); }
+
+.form-label { color: var(--navy); font-size: 0.84rem; font-weight: 700; }
+.form-control, .form-select {
+  min-height: 47px;
+  border: 1px solid #d9d3ca;
+  border-radius: 10px;
+  background: #fffefa;
+}
+.form-control:focus, .form-select:focus { border-color: var(--coral); box-shadow: 0 0 0 0.22rem rgba(229, 107, 79, 0.15); }
+.form-check-input:checked { background-color: var(--coral); border-color: var(--coral); }
+
+.table { --bs-table-bg: transparent; margin-bottom: 0; }
+.table thead th { color: var(--muted); border-bottom: 1px solid var(--line); font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase; }
+.table tbody td { border-color: #eee8df; padding: 1rem 0.75rem; }
+.table tbody tr:last-child td { border-bottom: 0; }
+.badge { border-radius: 6px; font-weight: 700; }
+.text-muted { color: var(--muted) !important; }
+
+.eyebrow { color: var(--coral-dark); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
+.hero-copy { max-width: 620px; }
+.hero-panel { padding: 2rem; background: var(--navy); color: white; border-radius: 22px; box-shadow: var(--shadow); }
+.hero-panel h2, .hero-panel h5 { color: white; }
+.hero-panel .list-group-item { color: #e9f0ef; background: transparent; border-color: rgba(255,255,255,.15); padding: 1rem 0; }
+.hero-panel .step { display: inline-grid; place-items: center; width: 29px; height: 29px; margin-right: .6rem; border-radius: 50%; color: var(--navy); background: var(--mint); font-weight: 800; }
+.page-heading { margin-bottom: 1.8rem; }
+.page-heading p { max-width: 600px; }
+.stat-label { color: var(--muted); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.stat-value { color: var(--navy); font-size: 1.7rem; font-weight: 800; }
+
 @media (max-width: 768px) {
-  .table-responsive {
-    font-size: 0.95rem;
-  }
+  main.container { padding-top: 2rem !important; }
+  .navbar .container { padding-left: 1rem; padding-right: 1rem; }
+  .navbar-text { display: none; }
+  .table-responsive { margin: 0 -0.5rem; font-size: 0.9rem; }
+  .table thead th, .table tbody td { white-space: nowrap; }
+  .card-body { padding: 1.2rem; }
 }

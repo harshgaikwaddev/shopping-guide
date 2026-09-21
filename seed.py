@@ -10,9 +10,103 @@ client = MongoClient(MONGO_URI)
 db = client[MONGO_DB_NAME]
 
 
+def seed_additional_demo_data():
+    shop_specs = [
+        {
+            "owner": {
+                "name": "Tech Hub Owner",
+                "email": "techhub@example.com",
+            },
+            "shop": {
+                "name": "Tech Hub",
+                "address": "Innovation Avenue",
+                "phone": "9222222222",
+                "category": "Computers & Accessories",
+                "lat": 28.6280,
+                "lng": 77.2195,
+            },
+            "products": [
+                ("Laptop Desk", 3499.0, 7),
+                ("Mechanical Keyboard", 4299.0, 4),
+            ],
+        },
+        {
+            "owner": {
+                "name": "Game Zone Owner",
+                "email": "gamezone@example.com",
+            },
+            "shop": {
+                "name": "Game Zone",
+                "address": "Stadium Circle",
+                "phone": "9333333333",
+                "category": "Gaming",
+                "lat": 28.6020,
+                "lng": 77.2290,
+            },
+            "products": [
+                ("Gaming Chair", 8999.0, 3),
+                ("Gaming Headphone", 2499.0, 9),
+            ],
+        },
+        {
+            "owner": {
+                "name": "Home Essentials Owner",
+                "email": "homeessentials@example.com",
+            },
+            "shop": {
+                "name": "Home Essentials",
+                "address": "Market Square",
+                "phone": "9444444444",
+                "category": "Home & Furniture",
+                "lat": 28.5750,
+                "lng": 77.2400,
+            },
+            "products": [("Foldable Table", 2199.0, 6)],
+        },
+    ]
+
+    for shop_spec in shop_specs:
+        owner = db.users.find_one({"email": shop_spec["owner"]["email"]})
+        if not owner:
+            owner = {
+                **shop_spec["owner"],
+                "password_hash": generate_password_hash("demo1234"),
+                "role": "owner",
+                "created_at": datetime.utcnow(),
+            }
+            owner_id = db.users.insert_one(owner).inserted_id
+        else:
+            owner_id = owner["_id"]
+
+        shop = db.shops.find_one({"name": shop_spec["shop"]["name"]})
+        if not shop:
+            shop = {
+                **shop_spec["shop"],
+                "owner_id": owner_id,
+                "created_at": datetime.utcnow(),
+                "updated_at": datetime.utcnow(),
+            }
+            shop_id = db.shops.insert_one(shop).inserted_id
+        else:
+            shop_id = shop["_id"]
+
+        for product_name, price, stock in shop_spec["products"]:
+            if not db.products.find_one({"shop_id": shop_id, "name": product_name}):
+                db.products.insert_one(
+                    {
+                        "shop_id": shop_id,
+                        "name": product_name,
+                        "price": price,
+                        "stock": stock,
+                        "updated_at": datetime.utcnow(),
+                    }
+                )
+
+
 def seed():
     if db.users.count_documents({}) > 0:
-        print("Database already has users. Skipping seed.")
+        seed_additional_demo_data()
+        print("Existing database updated with additional demo data.")
         return
 
     owner_id = db.users.insert_one(

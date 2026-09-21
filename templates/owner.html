@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<h2 class="mb-3">Owner dashboard</h2>
+<div class="page-heading">
+  <div class="eyebrow mb-2">Owner space</div>
+  <h2 class="mb-2">Run your shop with clarity.</h2>
+  <p class="text-muted mb-0">Keep your storefront details and product availability up to date.</p>
+</div>
 
 <div class="card mb-4">
   <div class="card-body">
-    <h5 class="card-title">Shop details</h5>
+    <h5 class="card-title mb-1">Shop details</h5>
+    <p class="text-muted small mb-4">This is what customers see when they find your shop.</p>
     <form method="post">
       <div class="row g-3">
         <div class="col-md-6">
@@ -43,8 +48,11 @@
 
 {% if shop %}
 <div class="d-flex align-items-center justify-content-between mb-2">
-  <h5 class="mb-0">Products</h5>
-  <a class="btn btn-sm btn-primary" href="{{ url_for('owner_product_new') }}">Add product</a>
+  <div>
+    <div class="eyebrow">Inventory</div>
+    <h5 class="mb-0 mt-1">Your products</h5>
+  </div>
+  <a class="btn btn-primary" href="{{ url_for('owner_product_new') }}">Add product</a>
 </div>
 <div class="table-responsive">
   <table class="table align-middle">

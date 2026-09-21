@@ -1,17 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<a class="btn btn-sm btn-outline-secondary mb-3" href="{{ url_for('customer_dashboard') }}">Back to search</a>
+<a class="btn btn-sm btn-outline-secondary mb-4" href="{{ url_for('customer_dashboard') }}">Back to search</a>
 
 <div class="card mb-4">
   <div class="card-body">
-    <h3 class="card-title">{{ shop.name }}</h3>
-    <p class="mb-1">{{ shop.address }}</p>
-    {% if shop.phone %}<p class="mb-1">Phone: {{ shop.phone }}</p>{% endif %}
-    {% if shop.category %}<p class="mb-0">Category: {{ shop.category }}</p>{% endif %}
+    <div class="eyebrow mb-2">Local shop</div>
+    <h3 class="card-title mb-3">{{ shop.name }}</h3>
+    <div class="row g-3">
+      <div class="col-md-4"><div class="stat-label">Address</div><div>{{ shop.address }}</div></div>
+      {% if shop.phone %}<div class="col-md-4"><div class="stat-label">Phone</div><div>{{ shop.phone }}</div></div>{% endif %}
+      {% if shop.category %}<div class="col-md-4"><div class="stat-label">Category</div><div>{{ shop.category }}</div></div>{% endif %}
+    </div>
   </div>
 </div>
 
-<h5>Products</h5>
+<h5 class="mb-3">Available products</h5>
 <div class="table-responsive">
   <table class="table align-middle">
     <thead>

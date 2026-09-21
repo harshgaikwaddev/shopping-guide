@@ -25,6 +25,11 @@ MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "shopping_guide")
 client = MongoClient(MONGO_URI)
 db = client[MONGO_DB_NAME]
 
+if os.getenv("SEED_DEMO_DATA", "").lower() == "true":
+    from seed import seed
+
+    seed()
+
 login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)

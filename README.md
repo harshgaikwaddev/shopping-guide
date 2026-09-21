@@ -79,6 +79,7 @@ Copy `.env.example` to `.env` and update the values when needed:
 MONGO_URI=mongodb://localhost:27017
 MONGO_DB_NAME=shopping_guide_dev
 SECRET_KEY=replace-with-a-random-secret
+SEED_DEMO_DATA=false
 ```
 
 Use a unique `MONGO_DB_NAME` for each local checkout or developer. This keeps test and seed data isolated when several environments use the same MongoDB server.
@@ -89,7 +90,9 @@ Use a unique `MONGO_DB_NAME` for each local checkout or developer. This keeps te
 python seed.py
 ```
 
-The seed script creates two demo shops, four products, and customer/owner accounts. It skips seeding when the selected database already contains users.
+The seed script creates five demo shops, nine products, and customer/owner accounts. It skips seeding when the selected database already contains users.
+
+For a hosted deployment, add `SEED_DEMO_DATA=true` to the deployment environment variables and redeploy once. The app will seed the deployment's configured MongoDB database during startup, then skip future runs after users exist. Set it back to `false` afterward.
 
 ### 5. Run the app
 

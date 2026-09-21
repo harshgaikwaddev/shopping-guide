@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h2 class="mb-3">Find products nearby</h2>
+<div class="page-heading">
+  <div class="eyebrow mb-2">Customer dashboard</div>
+  <h2 class="mb-2">Find products nearby</h2>
+  <p class="text-muted mb-0">Compare local prices and stock before you make the trip.</p>
+</div>
 <form class="card card-body mb-4" method="get" action="{{ url_for('customer_dashboard') }}">
   <div class="row g-3">
     <div class="col-md-6">
@@ -43,12 +47,15 @@
     </div>
 
     <div class="col-12">
-      <button class="btn btn-primary" type="submit">Search</button>
+      <button class="btn btn-primary px-4" type="submit">Search nearby</button>
     </div>
   </div>
 </form>
 
 {% if results %}
+<div class="d-flex align-items-center justify-content-between mb-2">
+  <h5 class="mb-0">{{ results|length }} result{% if results|length != 1 %}s{% endif %} found</h5>
+</div>
 <div class="table-responsive">
   <table class="table align-middle">
     <thead>

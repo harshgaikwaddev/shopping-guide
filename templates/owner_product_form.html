@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h2 class="mb-3">{% if mode == 'edit' %}Edit{% else %}Add{% endif %} product</h2>
+<div class="page-heading">
+  <div class="eyebrow mb-2">Inventory</div>
+  <h2 class="mb-2">{% if mode == 'edit' %}Edit product{% else %}Add a product{% endif %}</h2>
+  <p class="text-muted mb-0">Keep the details clear so customers know exactly what is available.</p>
+</div>
 <div class="card">
   <div class="card-body">
     <form method="post">
@@ -17,7 +21,7 @@
         <input class="form-control" type="number" name="stock" value="{{ product.stock if product else '' }}" required />
       </div>
       <div class="d-flex gap-2">
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">Save product</button>
         <a class="btn btn-outline-secondary" href="{{ url_for('owner_dashboard') }}">Cancel</a>
       </div>
     </form>
