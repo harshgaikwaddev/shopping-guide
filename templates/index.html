@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row align-items-center g-4">
+  <div class="col-lg-6">
+    <h1 class="display-5 fw-semibold">Local shopping, smarter choices</h1>
+    <p class="lead text-muted">
+      Compare nearby shop prices, check stock, and visit the store directly.
+    </p>
+    <div class="d-flex gap-2">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('signup') }}">Get Started</a>
+      <a class="btn btn-outline-secondary btn-lg" href="{{ url_for('login') }}">Login</a>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">How it works</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Search for a product near you.</li>
+          <li class="list-group-item">Compare shop prices and stock.</li>
+          <li class="list-group-item">Visit the shop and buy in person.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

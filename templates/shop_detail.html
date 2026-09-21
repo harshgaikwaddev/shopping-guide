@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="btn btn-sm btn-outline-secondary mb-3" href="{{ url_for('customer_dashboard') }}">Back to search</a>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h3 class="card-title">{{ shop.name }}</h3>
+    <p class="mb-1">{{ shop.address }}</p>
+    {% if shop.phone %}<p class="mb-1">Phone: {{ shop.phone }}</p>{% endif %}
+    {% if shop.category %}<p class="mb-0">Category: {{ shop.category }}</p>{% endif %}
+  </div>
+</div>
+
+<h5>Products</h5>
+<div class="table-responsive">
+  <table class="table align-middle">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price|money }}</td>
+        <td>{{ product.stock }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

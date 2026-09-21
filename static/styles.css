@@ -1,0 +1,21 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.table thead th {
+  font-weight: 600;
+}
+
+.navbar-brand {
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    font-size: 0.95rem;
+  }
+}

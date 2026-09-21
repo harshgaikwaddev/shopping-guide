@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Owner dashboard</h2>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Shop details</h5>
+    <form method="post">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Shop name</label>
+          <input class="form-control" type="text" name="name" value="{{ shop.name if shop else '' }}" required />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Category</label>
+          <input class="form-control" type="text" name="category" value="{{ shop.category if shop else '' }}" />
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Address</label>
+          <input class="form-control" type="text" name="address" value="{{ shop.address if shop else '' }}" required />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Phone</label>
+          <input class="form-control" type="text" name="phone" value="{{ shop.phone if shop else '' }}" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Latitude</label>
+          <input class="form-control" type="text" name="lat" value="{{ shop.lat if shop else '' }}" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Longitude</label>
+          <input class="form-control" type="text" name="lng" value="{{ shop.lng if shop else '' }}" />
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">
+            {% if shop %}Update shop{% else %}Register shop{% endif %}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% if shop %}
+<div class="d-flex align-items-center justify-content-between mb-2">
+  <h5 class="mb-0">Products</h5>
+  <a class="btn btn-sm btn-primary" href="{{ url_for('owner_product_new') }}">Add product</a>
+</div>
+<div class="table-responsive">
+  <table class="table align-middle">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Updated</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price|money }}</td>
+        <td>{{ product.stock }}</td>
+        <td>{{ product.updated_at.strftime('%Y-%m-%d') if product.updated_at else '-' }}</td>
+        <td class="text-end">
+          <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('owner_product_edit', product_id=product._id) }}">Edit</a>
+          <form class="d-inline" method="post" action="{{ url_for('owner_product_delete', product_id=product._id) }}">
+            <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Delete this product?')">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p class="text-muted">Register your shop to start adding products.</p>
+{% endif %}
+{% endblock %}
