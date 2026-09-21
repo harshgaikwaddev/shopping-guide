@@ -73,6 +73,78 @@ def seed():
         }
     ).inserted_id
 
+    tech_owner_id = db.users.insert_one(
+        {
+            "name": "Tech Hub Owner",
+            "email": "techhub@example.com",
+            "password_hash": generate_password_hash("demo1234"),
+            "role": "owner",
+            "created_at": datetime.utcnow(),
+        }
+    ).inserted_id
+
+    tech_shop_id = db.shops.insert_one(
+        {
+            "owner_id": tech_owner_id,
+            "name": "Tech Hub",
+            "address": "Innovation Avenue",
+            "phone": "9222222222",
+            "category": "Computers & Accessories",
+            "lat": 28.6280,
+            "lng": 77.2195,
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow(),
+        }
+    ).inserted_id
+
+    gaming_owner_id = db.users.insert_one(
+        {
+            "name": "Game Zone Owner",
+            "email": "gamezone@example.com",
+            "password_hash": generate_password_hash("demo1234"),
+            "role": "owner",
+            "created_at": datetime.utcnow(),
+        }
+    ).inserted_id
+
+    gaming_shop_id = db.shops.insert_one(
+        {
+            "owner_id": gaming_owner_id,
+            "name": "Game Zone",
+            "address": "Stadium Circle",
+            "phone": "9333333333",
+            "category": "Gaming",
+            "lat": 28.6020,
+            "lng": 77.2290,
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow(),
+        }
+    ).inserted_id
+
+    home_owner_id = db.users.insert_one(
+        {
+            "name": "Home Essentials Owner",
+            "email": "homeessentials@example.com",
+            "password_hash": generate_password_hash("demo1234"),
+            "role": "owner",
+            "created_at": datetime.utcnow(),
+        }
+    ).inserted_id
+
+    home_shop_id = db.shops.insert_one(
+        {
+            "owner_id": home_owner_id,
+            "name": "Home Essentials",
+            "address": "Market Square",
+            "phone": "9444444444",
+            "category": "Home & Furniture",
+            "lat": 28.5750,
+            "lng": 77.2400,
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow(),
+        }
+    ).inserted_id
+
     db.products.insert_many(
         [
             {
@@ -101,6 +173,41 @@ def seed():
                 "name": "Olive Oil 1L",
                 "price": 899.0,
                 "stock": 0,
+                "updated_at": datetime.utcnow(),
+            },
+            {
+                "shop_id": tech_shop_id,
+                "name": "Laptop Desk",
+                "price": 3499.0,
+                "stock": 7,
+                "updated_at": datetime.utcnow(),
+            },
+            {
+                "shop_id": tech_shop_id,
+                "name": "Mechanical Keyboard",
+                "price": 4299.0,
+                "stock": 4,
+                "updated_at": datetime.utcnow(),
+            },
+            {
+                "shop_id": gaming_shop_id,
+                "name": "Gaming Chair",
+                "price": 8999.0,
+                "stock": 3,
+                "updated_at": datetime.utcnow(),
+            },
+            {
+                "shop_id": gaming_shop_id,
+                "name": "Gaming Headphone",
+                "price": 2499.0,
+                "stock": 9,
+                "updated_at": datetime.utcnow(),
+            },
+            {
+                "shop_id": home_shop_id,
+                "name": "Foldable Table",
+                "price": 2199.0,
+                "stock": 6,
                 "updated_at": datetime.utcnow(),
             },
         ]

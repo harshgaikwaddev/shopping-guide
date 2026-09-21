@@ -108,6 +108,9 @@ On Windows, `start.ps1` can start MongoDB and the Flask app together when MongoD
 | Customer | `customer@example.com` | `demo1234` |
 | Owner | `owner@example.com` | `demo1234` |
 | Owner | `grocery@example.com` | `demo1234` |
+| Owner | `techhub@example.com` | `demo1234` |
+| Owner | `gamezone@example.com` | `demo1234` |
+| Owner | `homeessentials@example.com` | `demo1234` |
 
 ## Project Layout
 
